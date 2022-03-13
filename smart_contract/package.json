@@ -1,0 +1,11 @@
+{
+  "name": "deft_smart_contract",
+  "version": "1.0.0",
+  "description": "A smart contract for sending ethereum accross the world",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Subhradwip Kulavi",
+  "license": "ISC"
+}
