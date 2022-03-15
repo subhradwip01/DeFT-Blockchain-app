@@ -1,12 +1,13 @@
 import React from 'react'
-import { Navbar,Welcome,Footer,Services,Transactions } from './components'
+import { Navbar,Payment,Footer,Services,Transactions, HeroSlider } from './components'
 
 const App = () => {
   return (
     <div className='min-hscreen'>
-      <div className='gradient-bg-welcome'>
+      <div className='bg-[#F6F0F5]'>
         <Navbar/>
-        <Welcome/>
+        <HeroSlider/>
+        <Payment/>
       </div>
       <Services/>
       <Transactions/>
