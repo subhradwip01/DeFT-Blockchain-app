@@ -29,24 +29,24 @@ const Navbar = () => {
     <div className="md:flex-[0.5] flex-initial justify-center items-center">
       <div className='flex items-center justify-center'>
       <img src={logo} alt="logo" className='w-12 cursor-pointer'/>
-      <p className='text-white text-2xl font-bold pl-1.5'>DeFT</p>
+      <p className='text-black text-2xl font-bold pl-1.5'>DeFT</p>
       </div>
       </div>
-      <ul className="text-white hover:text-base md:flex hidden list-none flex-row justify-between items-center flex-initial">
+      <ul className="text-black hover:text-base md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {menu.map((item,i)=>(
           <NavItem key={item+i} title={item.name}></NavItem>
         ))}
         </ul>
         <div className='flex relative'>
           {!toggleMenu
-          ? <HiMenuAlt4 fontSize={28} className="text-white md:hidden cursor-pointer" onClick={()=>setTogglesMenu(!toggleMenu)}/>
+          ? <HiMenuAlt4 fontSize={28} className="text-black md:hidden cursor-pointer" onClick={()=>setTogglesMenu(!toggleMenu)}/>
          : null}
          {toggleMenu && 
          <ul className='z-10 fixed top-0 -right-2 p-3 w-[70w] h-screen shadow-2xl md:hidden list-none
-         flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in'>
-           <li><AiOutlineClose fontSize={28} className="text-white md:hidden cursor-pointer" onClick={()=>setTogglesMenu(!toggleMenu)}/></li>
+         flex flex-col justify-start items-end rounded-md blue-glassmorphism text-black animate-slide-in'>
+           <li><AiOutlineClose fontSize={28} className="text-black md:hidden cursor-pointer" onClick={()=>setTogglesMenu(!toggleMenu)}/></li>
            {menu.map((item,i)=>(
-          <NavItem key={item+i} title={item.name} classProps="my-2 text-lg text-white"></NavItem>
+          <NavItem key={item+i} title={item.name} classProps="my-2 text-lg text-black"></NavItem>
         ))}
            </ul>}
 
