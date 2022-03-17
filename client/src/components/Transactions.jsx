@@ -44,7 +44,7 @@ const TransactionCard = ({ addressFrom, addressTo, amount, timestamp }) => {
   );
 };
 
-const Transactions = () => {
+const Transactions = ({simplified}) => {
   const [currentAccount, setCurrentAcconut] = useState(true);
   return (
     <>
