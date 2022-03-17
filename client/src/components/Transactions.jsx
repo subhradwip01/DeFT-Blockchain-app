@@ -44,7 +44,7 @@ const TransactionCard = ({ addressFrom, addressTo, amount, timestamp }) => {
   );
 };
 
-const Transactions = ({simplified}) => {
+const Transactions = ({smplified}) => {
   const [currentAccount, setCurrentAcconut] = useState(true);
   return (
     <>
@@ -52,7 +52,7 @@ const Transactions = ({simplified}) => {
         <div className="flex flex-col md:p-12 py-12 px-4">
           {currentAccount ? (
             <h3 className="text-black text-3xl text-center my-2">
-              Latest Transactions
+              {smplified ? "Latest Transactions" : "All Transactions"}
             </h3>
           ) : (
             <h3 className="text-black text-3xl text-center my-2">

@@ -7,7 +7,8 @@ import { NavLink } from "react-router-dom";
 const NavItem = ({ title, path, classProps }) => {
   return (
     <li className={`mx-4 cursor-pointer ${classProps} hover:hover:text-[#DB5671]`}>
-      <NavLink to={path} className={(navData) => (navData.isActive ? 'text-[#DB5671]' : '')}>{title}</NavLink>
+      {title!="Explore" && <NavLink to={path} className={(navData) => (navData.isActive ? 'text-[#DB5671]' : '')}>{title}</NavLink>}
+      {title==="Explore" && <a href="https://crypto-world-reactjs-app.netlify.app" target="_blank">{title}</a>}
     </li>
   );
 };
@@ -21,7 +22,7 @@ const Navbar = () => {
     },
     {
       name: "Explore",
-      path: "link",
+      path: "https://crypto-world-reactjs-app.netlify.app",
     },
     {
       name: "Transactions",
@@ -38,6 +39,7 @@ const Navbar = () => {
       </div>
       <ul className="text-black hover:text-base md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {menu.map((item, i) => (
+          
           <NavItem key={item + i} path={item.path} title={item.name}></NavItem>
         ))}
       </ul>
