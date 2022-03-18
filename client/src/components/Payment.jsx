@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useContext} from "react";
 import { SiEthereum } from "react-icons/si";
 import { Loader } from "./index";
 import { BsInfoCircle } from "react-icons/bs";
+import { TransactionContext } from "../context/TransactionContext";
 const Input = ({ placeholder, name, type, value, handleChanhe }) => {
   return (
     <input
@@ -9,17 +10,24 @@ const Input = ({ placeholder, name, type, value, handleChanhe }) => {
       name={name}
       type={type}
       value={value}
-      onChange={(e) => handleChanhe(e)}
+      onChange={(e) => handleChanhe(e,name)}
       className="my-2 w-full rounded-md p-2 outline-none bg-[#F7F8FA] text-sm"
     />
   );
 };
 
 const Payment = () => {
-  const acc=false
-  const handleChange = (e) => {
-    console.log(e.target.name);
-  };
+  const {connectWallet,currentAccount,formData,setFormData,handleChange,payment} = useContext(TransactionContext)
+  const handleSubmit=(e)=>{
+    const {toAddress,amount}=formData;
+    e.preventDefault();
+
+    if(!toAddress || !amount){
+      window.alert("Please fill all info before make payment")
+      return;
+    }
+    payment()
+  }
   return (
     <div className="grid  md:grid-cols-2 grid-cols-1 items-center justify-items-center sm:py-20 py-10 ">
       <div className="p-3 md:w-[50%] w-[250px] sm:h-[250px] h-[170px] sm:mx-auto ml-5 eth-card white-glassmorphism">
@@ -48,17 +56,12 @@ const Payment = () => {
         ></Input>
         <Input
           placeholder="Enter Amout of Ether (required!)"
-          name="ethAmount"
+          name="amount"
           type="text"
           handleChanhe={handleChange}
         ></Input>
-        <Input
-          placeholder="Enter Message"
-          name="toAddress"
-          type="message"
-          handleChanhe={handleChange}
-        ></Input>
-        {!acc && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl">Connect</div>}
+        {!currentAccount && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl cursor-pointer" onClick={connectWallet}>Connect</div>}
+        {currentAccount && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl cursor-pointer" onClick={handleSubmit}>Pay</div>}
       </div>
     </div>
   );
