@@ -28,10 +28,10 @@ contract Transactions {
     } 
 
     function getAllTransactions() public view returns (TransfarStruct[] memory) {
-
+        return transactions;
     }
 
     function getTheTransactionCount() public view returns (uint256){
-
+        return transactionCounter;
     } 
 }
