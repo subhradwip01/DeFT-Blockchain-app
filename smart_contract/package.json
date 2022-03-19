@@ -15,5 +15,8 @@
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.6.1",
     "hardhat": "^2.9.1"
+  },
+  "dependencies": {
+    "framer-motion": "^6.2.8"
   }
 }
