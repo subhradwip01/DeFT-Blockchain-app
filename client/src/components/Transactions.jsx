@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import dummydata from "../utils/dummydata";
 import { FiArrowUpRight } from "react-icons/fi";
 import addressShortner from "../utils/addressShortner";
-const TransactionCard = ({ addressFrom, addressTo, amount, timestamp }) => {
+import { TransactionContext } from "../context/TransactionContext";
+const TransactionCard = ({ addressFrom, addressTo, amount, timestamp}) => {
+  
   return (
     <div
       className="shadow-xl rounded-md bg-[#FAEAF1]  2xl:min-w-[450px]
     2xl:max-w-[500px]
     sm:min-w-[270px]
     sm:max-w-[300px]
-    min-w-full px-10 py-12 m-3"
+    min-w-full px-10 py-12 m-3 "
     >
       <div className="flex justify-between mb-3">
         <p className="font-semibold">From:</p>
@@ -30,7 +32,7 @@ const TransactionCard = ({ addressFrom, addressTo, amount, timestamp }) => {
       <div className="w-full bg-[#E37C91] py-5 text-white font-semibold">
         <a
           className="flex justify-center"
-          href="http://google.com"
+          href={`https://ropsten.etherscan.io/address/${addressFrom}`}
           target="_blank"
           rel="noreferrer"
         >
@@ -45,7 +47,9 @@ const TransactionCard = ({ addressFrom, addressTo, amount, timestamp }) => {
 };
 
 const Transactions = ({smplified}) => {
-  const [currentAccount, setCurrentAcconut] = useState(true);
+
+  const {currentAccount,allTxn} = useContext(TransactionContext)
+  
   return (
     <>
       <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
@@ -60,8 +64,9 @@ const Transactions = ({smplified}) => {
             </h3>
           )}
           {currentAccount && (
-            <div className="flex flex-wrap justify-center items-center mt-10">
-              {[...dummydata].reverse().map((transaction, i) => (
+            <div className={`${!smplified? 'h-[100vh]':''}`}>
+            <div className={`flex flex-wrap justify-center mt-10 ${!smplified? '':'items-center'}`}>
+              {[...allTxn].reverse().map((transaction, i) => (
                 <TransactionCard
                   key={i}
                   addressFrom={transaction.addressFrom}
@@ -70,6 +75,7 @@ const Transactions = ({smplified}) => {
                   timestamp={transaction.timestamp}
                 />
               ))}
+            </div>
             </div>
           )}
         </div>
