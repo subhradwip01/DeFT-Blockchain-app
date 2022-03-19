@@ -1,5 +1,4 @@
 import React, { useState,useContext } from "react";
-import dummydata from "../utils/dummydata";
 import { FiArrowUpRight } from "react-icons/fi";
 import addressShortner from "../utils/addressShortner";
 import { TransactionContext } from "../context/TransactionContext";
