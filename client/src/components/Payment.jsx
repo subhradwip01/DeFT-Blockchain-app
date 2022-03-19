@@ -2,6 +2,7 @@ import React,{useContext} from "react";
 import { SiEthereum } from "react-icons/si";
 import { Loader } from "./index";
 import { BsInfoCircle } from "react-icons/bs";
+import addressShortner from "../utils/addressShortner";
 import { TransactionContext } from "../context/TransactionContext";
 const Input = ({ placeholder, name, type, value, handleChanhe }) => {
   return (
@@ -17,7 +18,7 @@ const Input = ({ placeholder, name, type, value, handleChanhe }) => {
 };
 
 const Payment = () => {
-  const {connectWallet,currentAccount,formData,setFormData,handleChange,payment} = useContext(TransactionContext)
+  const {connectWallet,currentAccount,formData,handleChange,payment,isLoading} = useContext(TransactionContext)
   const handleSubmit=(e)=>{
     const {toAddress,amount}=formData;
     e.preventDefault();
@@ -40,8 +41,8 @@ const Payment = () => {
           </div>
           <div>
             <p className="text-white font-light text-sm">
-              {/* {shortenAddress(currentAccount)} */}
-              No Acoount is Connected
+              {currentAccount && addressShortner(currentAccount)}
+              {!currentAccount && "No Acoount is Connected"}
             </p>
             <p className="text-white font-semibold text-lg mt-1">Ethereum</p>
           </div>
@@ -61,7 +62,8 @@ const Payment = () => {
           handleChanhe={handleChange}
         ></Input>
         {!currentAccount && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl cursor-pointer" onClick={connectWallet}>Connect</div>}
-        {currentAccount && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl cursor-pointer" onClick={handleSubmit}>Pay</div>}
+        {!isLoading && currentAccount && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl cursor-pointer" onClick={handleSubmit}>Pay</div>}
+        {isLoading && currentAccount && <div className="w-full flex justify-center align-center my-4 bg-[#FAEAF1] py-4 rounded-md text-[#DA526D] text-xl cursor-pointer"><Loader/></div>}
       </div>
     </div>
   );
